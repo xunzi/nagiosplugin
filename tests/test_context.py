@@ -33,7 +33,7 @@ class ScalarContextTest(unittest.TestCase):
     def test_state_ranges_values(self):
         test_cases = [
             (1, nagiosplugin.Ok, None),
-            (3, nagiosplugin.Warn, 'outside range 0:2'),
+            (3, nagiosplugin.Warning, 'outside range 0:2'),
             (5, nagiosplugin.Critical, 'outside range 0:4'),
         ]
         c = ScalarContext('ctx', '0:2', '0:4')

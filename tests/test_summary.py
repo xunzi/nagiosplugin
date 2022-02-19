@@ -24,4 +24,4 @@ class SummaryTest(unittest.TestCase):
             Summary().verbose(nagiosplugin.Results(
                 nagiosplugin.Result(nagiosplugin.Critical, 'reason1'),
                 nagiosplugin.Result(nagiosplugin.Ok, 'ignore'),
-                nagiosplugin.Result(nagiosplugin.Warn, 'reason2'))))
+                nagiosplugin.Result(nagiosplugin.Warning, 'reason2'))))

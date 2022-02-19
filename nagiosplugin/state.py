@@ -45,13 +45,13 @@ class Ok(ServiceState):
 Ok = Ok()
 
 
-class Warn(ServiceState):
+class Warning(ServiceState):
 
     def __new__(cls):
-        return super(cls, Warn).__new__(cls, 1, 'warning')
+        return super(cls, Warning).__new__(cls, 1, 'warning')
 
 
-Warn = Warn()
+Warning = Warning()
 
 
 class Critical(ServiceState):

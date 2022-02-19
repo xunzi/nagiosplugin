@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from nagiosplugin.result import Result, Results
-from nagiosplugin.state import Ok, Warn, Critical, Unknown
+from nagiosplugin.state import Ok, Warning, Critical, Unknown
 import nagiosplugin
 
 try:
@@ -29,18 +29,18 @@ class ResultTest(unittest.TestCase):
 
     def test_str_metric_with_hint(self):
         self.assertEqual('2 (unexpected)',
-                         str(Result(Warn, 'unexpected',
+                         str(Result(Warning, 'unexpected',
                                     nagiosplugin.Metric('foo', 2))))
 
     def test_str_metric_only(self):
         self.assertEqual(
-            '3', str(Result(Warn, metric=nagiosplugin.Metric('foo', 3))))
+            '3', str(Result(Warning, metric=nagiosplugin.Metric('foo', 3))))
 
     def test_str_hint_only(self):
-        self.assertEqual('how come?', str(Result(Warn, 'how come?')))
+        self.assertEqual('how come?', str(Result(Warning, 'how come?')))
 
     def test_str_empty(self):
-        self.assertEqual('', str(Result(Warn)))
+        self.assertEqual('', str(Result(Warning)))
 
 
 class ResultsTest(unittest.TestCase):
@@ -64,8 +64,8 @@ class ResultsTest(unittest.TestCase):
 
     def test_iterate_in_order_of_descending_states(self):
         r = Results()
-        r.add(Result(Warn), Result(Ok), Result(Critical), Result(Warn))
-        self.assertEqual([Critical, Warn, Warn, Ok],
+        r.add(Result(Warning), Result(Ok), Result(Critical), Result(Warning))
+        self.assertEqual([Critical, Warning, Warning, Ok],
                          [result.state for result in r])
 
     def test_most_significant_state_shoud_raise_valueerror_if_empty(self):
@@ -78,7 +78,7 @@ class ResultsTest(unittest.TestCase):
         self.assertEqual(Ok, r.most_significant_state)
         r.add(Result(Critical))
         self.assertEqual(Critical, r.most_significant_state)
-        r.add(Result(Warn))
+        r.add(Result(Warning))
         self.assertEqual(Critical, r.most_significant_state)
 
     def test_most_significant_should_return_empty_set_if_empty(self):
@@ -86,8 +86,8 @@ class ResultsTest(unittest.TestCase):
 
     def test_most_signigicant(self):
         r = Results()
-        r.add(Result(Ok), Result(Warn), Result(Ok), Result(Warn))
-        self.assertEqual([Warn, Warn],
+        r.add(Result(Ok), Result(Warning), Result(Ok), Result(Warning))
+        self.assertEqual([Warning, Warning],
                          [result.state for result in r.most_significant])
 
     def test_first_significant(self):

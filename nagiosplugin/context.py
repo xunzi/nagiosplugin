@@ -16,7 +16,7 @@ evaluation or performance data logic.
 from .performance import Performance
 from .range import Range
 from .result import Result
-from .state import Ok, Warn, Critical
+from .state import Ok, Warning, Critical
 
 
 class Context(object):
@@ -138,7 +138,7 @@ class ScalarContext(Context):
         if not self.critical.match(metric.value):
             return self.result_cls(Critical, self.critical.violation, metric)
         if not self.warning.match(metric.value):
-            return self.result_cls(Warn, self.warning.violation, metric)
+            return self.result_cls(Warning, self.warning.violation, metric)
         return self.result_cls(Ok, None, metric)
 
     def performance(self, metric, resource):
